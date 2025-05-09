@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fiche Technique</title>
+  <script>
+    function getParams() {
+      const params = new URLSearchParams(window.location.search);
+      return {
+        marque: params.get("marque"),
+        modele: params.get("modele"),
+        annee: params.get("annee"),
+        finition: params.get("finition"),
+        motorisation: params.get("motorisation"),
+        boite: params.get("boite"),
+        kilometrage: params.get("kilometrage")
+      };
+    }
+
+    window.onload = () => {
+      const infos = getParams();
+      document.getElementById("titre").innerText = `${infos.marque} ${infos.modele} ${infos.annee} - ${infos.finition} - ${infos.motorisation} - ${infos.boite} - ${infos.kilometrage}`;
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-xl p-6">
+    <h1 id="titre" class="text-2xl font-bold text-gray-800 mb-4">Chargement...</h1>
+
+    <div class="mt-4">
+      <h2 class="text-lg font-semibold text-gray-700 mb-2">Arguments commerciaux :</h2>
+      <div class="border border-dashed border-gray-400 rounded-md p-4 min-h-[200px] text-gray-600">
+        <!-- À compléter -->
+        À compléter...
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+[
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2010",
+    "finition": "S LINE SPORTPAKET",
+    "motorisation": "DIESEL 1,6 TDI 90 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2010",
+    "finition": "ATTRACTION",
+    "motorisation": "DIESEL 1,6 TDI 90 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2010",
+    "finition": "AMBITION",
+    "motorisation": "DIESEL 1,6 TDI 90 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2010",
+    "finition": "AMBIENTE",
+    "motorisation": "DIESEL 1,6 TDI 90 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2010",
+    "finition": "S LINE SPORTPAKET",
+    "motorisation": "DIESEL 1,6 TDI 105 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2010",
+    "finition": "ATTRACTION",
+    "motorisation": "DIESEL 1,6 TDI 105 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2011",
+    "finition": "S LINE SPORTPAKET",
+    "motorisation": "ESSENCE 1,2 TFSI 85 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2011",
+    "finition": "S LINE EDITION",
+    "motorisation": "ESSENCE 1,2 TFSI 85 CV"
+  },
+  {
+    "marque": "AUDI",
+    "modele": "A1",
+    "annee": "2011",
+    "finition": "BLACK & WHITE",
+    "motorisation": "DIESEL 1,6 TDI 90 CV"
+  }
+]

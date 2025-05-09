@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Recherche Véhicule</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    let data = [];
+
+    async function fetchData() {
+      // À remplacer par l’URL de ton fichier JSON hébergé ou API
+      const response = await fetch("data.json");
+      data = await response.json();
+      populateMarques();
+    }
+
+    function populateMarques() {
+      const marques = [...new Set(data.map(item => item.MARQUE))];
+      updateSelect("marque", marques);
+    }
+
+    function updateSelect(id, options) {
+      const select = document.getElementById(id);
+      select.innerHTML = '<option value="">-- Choisir --</option>';
+      options.forEach(option => {
+        const el = document.createElement("option");
+        el.value = option;
+        el.textContent = option;
+        select.appendChild(el);
+      });
+    }
+
+    function onChangeSelect(current, next, field) {
+      const filters = {
+        marque: document.getElementById("marque").value,
+        modele: document.getElementById("modele").value,
+        annee: document.getElementById("annee").value,
+        finition: document.getElementById("finition").value,
+      };
+
+      const filtered = data.filter(item =>
+        Object.entries(filters).every(([key, val]) => val === "" || item[key.toUpperCase()] === val)
+      );
+
+      const values = [...new Set(filtered.map(item => item[field.toUpperCase()]))];
+      updateSelect(next, values);
+    }
+
+    function checkAllFilled() {
+      const fields = ["marque", "modele", "annee", "finition", "motorisation"];
+      return fields.every(id => document.getElementById(id).value !== "");
+    }
+
+    function showPopupIfReady() {
+      if (checkAllFilled()) {
+        document.getElementById("popup").classList.remove("hidden");
+      }
+    }
+
+    function rechercher() {
+      const params = new URLSearchParams();
+      ["marque", "modele", "annee", "finition", "motorisation", "boite", "kilometrage"].forEach(id => {
+        params.append(id, document.getElementById(id).value);
+      });
+      window.location.href = "fiche.html?" + params.toString();
+    }
+
+    window.onload = fetchData;
+  </script>
+</head>
+<body class="bg-gray-100 min-h-screen p-6">
+  <div class="max-w-2xl mx-auto bg-white shadow-md p-6 rounded-xl">
+    <h1 class="text-2xl font-bold mb-4 text-gray-700">Sélection du véhicule</h1>
+
+    <div class="space-y-4">
+      <div>
+        <label class="block text-gray-700">Marque</label>
+        <select id="marque" class="w-full p-2 border rounded" onchange="onChangeSelect(this, 'modele', 'MODELE')">
+          <option value="">-- Choisir --</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Modèle</label>
+        <select id="modele" class="w-full p-2 border rounded" onchange="onChangeSelect(this, 'annee', 'ANNEE')">
+          <option value="">-- Choisir --</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Année</label>
+        <select id="annee" class="w-full p-2 border rounded" onchange="onChangeSelect(this, 'finition', 'FINITION')">
+          <option value="">-- Choisir --</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Finition</label>
+        <select id="finition" class="w-full p-2 border rounded" onchange="onChangeSelect(this, 'motorisation', 'MOTORISATION')">
+          <option value="">-- Choisir --</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-gray-700">Motorisation</label>
+        <select id="motorisation" class="w-full p-2 border rounded" onchange="showPopupIfReady()">
+          <option value="">-- Choisir --</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- POPUP -->
+  <div id="popup" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-md">
+      <h2 class="text-xl font-bold text-gray-700 mb-4">Détails supplémentaires</h2>
+
+      <div class="mb-4">
+        <label class="block text-gray-700">Boîte de vitesse</label>
+        <select id="boite" class="w-full p-2 border rounded">
+          <option value="MANUELLE">Manuelle</option>
+          <option value="AUTOMATIQUE">Automatique</option>
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-gray-700">Kilométrage</label>
+        <select id="kilometrage" class="w-full p-2 border rounded">
+          <option value="0 à 50 000 km">0 à 50 000 km</option>
+          <option value="50 000 à 100 000 km">50 000 à 100 000 km</option>
+          <option value="100 000 à 150 000 km">100 000 à 150 000 km</option>
+          <option value="plus de 150 000 km">Plus de 150 000 km</option>
+        </select>
+      </div>
+
+      <div class="flex justify-end space-x-2">
+        <button onclick="document.getElementById('popup').classList.add('hidden')" class="px-4 py-2 bg-gray-300 rounded">Annuler</button>
+        <button onclick="rechercher()" class="px-4 py-2 bg-blue-600 text-white rounded">Rechercher</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
